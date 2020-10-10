@@ -45,7 +45,7 @@ namespace WABot.Controllers
                     case "ogg":
                         return await api.SendOgg(message.ChatId);
                     case "geo":
-                        return await api.SendGeo(message.ChatId);
+                        return await api.SendGeo(message.ChatId, "", "");
                     case "group":
                         return await api.CreateGroup(message.Author);
                     default:
@@ -61,8 +61,8 @@ namespace WABot.Controllers
         {
             string retornar = "";
             foreach (var message in data.Messages)
-            {              
-                    retornar = await api.SendFile(message.ChatId, message.Body);
+            {
+                retornar = await api.SendFile(message.ChatId, message.Body);
             }
             return retornar;
         }
@@ -76,6 +76,17 @@ namespace WABot.Controllers
             foreach (var message in data.Messages)
             {
                 retornar = await api.SendMessage(message.ChatId, message.Body);
+            }
+            return retornar;
+        }
+        [HttpPost]
+        [Route("enviarubicacion")]
+        public async Task<string> Enviarubicacion(Answer data)
+        {
+            string retornar = "";
+            foreach (var message in data.Messages)
+            {
+                retornar = await api.SendGeo(message.ChatId, message.Author,message.Id);
             }
             return retornar;
         }

@@ -157,13 +157,13 @@ namespace WABot.Api
         /// </summary>
         /// <param name="chatID">chat ID</param>
         /// <returns></returns>
-        public async Task<string> SendGeo(string chatID)
+        public async Task<string> SendGeo(string chatID,string lat, string lng)
         {
             var data = new Dictionary<string, string>()
             {
-                { "lat", "55.756693" },
-                { "lng", "37.621578" },
-                { "address", "Your address" },
+                { "lat", lat },
+                { "lng", lng },
+                { "address", "Ubicación" },
                 { "chatId", chatID}
             };
             return await SendRequest("sendLocation", JsonConvert.SerializeObject(data));
@@ -227,6 +227,7 @@ namespace WABot.Api
             //    return await SendRequest("sendFile", JsonConvert.SerializeObject(data));
             //}
             //return await SendMessage(chatID, "No file with this format");
+
         }
     }
 }
